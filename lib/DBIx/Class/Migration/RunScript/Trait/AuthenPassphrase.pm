@@ -67,7 +67,7 @@ passwords with a run script they will appear in plain text in the database.
 
 In order to help with this problem, this trait can be applied to your run script
 builder and will expose an L<Authen::Password> object.  This will be
-compatible with L<DBIx::Class::PassphraseColumn>> which is the system I favor
+compatible with L<DBIx::Class::PassphraseColumn> which is the system I favor
 for hashing user passwords.  So if for example you have a result class
 C<MyApp::Schema::User> defined like:
 

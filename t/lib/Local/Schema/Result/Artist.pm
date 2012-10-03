@@ -1,6 +1,7 @@
 package Local::Schema::Result::Artist;
 use base qw/DBIx::Class::Core/;
 
+__PACKAGE__->load_components(qw(PassphraseColumn));
 __PACKAGE__->table('artist');
 
 __PACKAGE__->add_columns(
@@ -15,6 +16,16 @@ __PACKAGE__->add_columns(
   name => {
     data_type => 'varchar',
     size => '96',
+  },
+  passphrase => {
+    data_type => 'text',
+    passphrase => 'rfc2307',
+    passphrase_class => 'SaltedDigest',
+    passphrase_args  => {
+      algorithm   => 'SHA-1',
+      salt_random => 20,
+    },
+    passphrase_check_method => 'check_passphrase',
   });
 
 __PACKAGE__->set_primary_key('artist_id');
