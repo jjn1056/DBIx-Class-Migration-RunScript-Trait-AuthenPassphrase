@@ -20,6 +20,8 @@ sub authen_passphrase {
 
 1;
 
+__END__
+
 =head1 NAME
 
 DBIx::Class::Migration::RunScript::Trait::AuthenPassphrase - encode values
@@ -94,9 +96,7 @@ __PACKAGE__->set_primary_key('id');
 
 (Example copied from L<DBIx::Class::PassphraseColumn>DBIx::Class::PassphraseColumn>)
 
-
 You can supply correctly hashed passwords using the following:
-
 
     builder {
       'AuthenPassphrase',
@@ -119,7 +119,8 @@ You can supply correctly hashed passwords using the following:
     };
 
 We have matched the arguments to how L<DBIx::Class::PassphraseColumn> works
-so that it is easier for you to copy or consolodate the configuration.
+so that it is easier for you to synchronize the configuration between both
+systems.
 
 If you wish to use this trait with the C<migrate> helper (which applies some
 useful traits by default), you should do the following:
@@ -140,32 +141,27 @@ get this working as expected.
 
 This class defines the follow methods.
 
-=head2 target_path
+=head2 authen_passphrase
 
-@args are optional.
+Requires a HashRef and a Scalar argument.
 
-returns a path to whatever C<target_dir> is (typically PROJECT_ROOT/share if
-you are using the default).  If you pass @args, those args will be added as
-path parts to the returned path.
-
-Example usage:
-
-  $self->target_path
-  $self->target_path('file');
-  $self->target_path('path', 'to', 'file');
+Returns an L<Authen::Passphrase> encoded string, based on the provided \%args
+and $string to encode.  See L</SYNOPSIS> and L</DESCRIPTION> for more.
 
 =head1 SEE ALSO
 
-L<DBIx::Class::Migration>, L<DBIx::Class::Migration::RunScript>
+L<DBIx::Class::Migration>, L<DBIx::Class::Migration::RunScript>,
+L<Authen::Passphrase>.
 
 =head1 AUTHOR
 
-See L<DBIx::Class::Migration> for author information
+John Napiorkowski L<email:jjnapiork@cpan.org>
 
 =head1 COPYRIGHT & LICENSE
 
-See L<DBIx::Class::Migration> for copyright and license information
+Copyright 2012, John Napiorkowski L<email:jjnapiork@cpan.org>
+
+This library is free software; you can redistribute it and/or modify it under
+the same terms as Perl itself.
 
 =cut
-
-

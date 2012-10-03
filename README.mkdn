@@ -45,7 +45,7 @@ passwords with a run script they will appear in plain text in the database.
 
 In order to help with this problem, this trait can be applied to your run script
 builder and will expose an [Authen::Password](http://search.cpan.org/perldoc?Authen::Password) object.  This will be
-compatible with [DBIx::Class::PassphraseColumn](http://search.cpan.org/perldoc?DBIx::Class::PassphraseColumn)\> which is the system I favor
+compatible with [DBIx::Class::PassphraseColumn](http://search.cpan.org/perldoc?DBIx::Class::PassphraseColumn) which is the system I favor
 for hashing user passwords.  So if for example you have a result class
 `MyApp::Schema::User` defined like:
 
@@ -72,11 +72,7 @@ for hashing user passwords.  So if for example you have a result class
 
 (Example copied from [DBIx::Class::PassphraseColumn](http://search.cpan.org/perldoc?DBIx::Class::PassphraseColumn)DBIx::Class::PassphraseColumn>)
 
-
-
 You can supply correctly hashed passwords using the following:
-
-
 
     builder {
       'AuthenPassphrase',
@@ -99,7 +95,8 @@ You can supply correctly hashed passwords using the following:
     };
 
 We have matched the arguments to how [DBIx::Class::PassphraseColumn](http://search.cpan.org/perldoc?DBIx::Class::PassphraseColumn) works
-so that it is easier for you to copy or consolodate the configuration.
+so that it is easier for you to synchronize the configuration between both
+systems.
 
 If you wish to use this trait with the `migrate` helper (which applies some
 useful traits by default), you should do the following:
@@ -120,28 +117,25 @@ get this working as expected.
 
 This class defines the follow methods.
 
-## target\_path
+## authen\_passphrase
 
-@args are optional.
+Requires a HashRef and a Scalar argument.
 
-returns a path to whatever `target_dir` is (typically PROJECT\_ROOT/share if
-you are using the default).  If you pass @args, those args will be added as
-path parts to the returned path.
-
-Example usage:
-
-    $self->target_path
-    $self->target_path('file');
-    $self->target_path('path', 'to', 'file');
+Returns an [Authen::Passphrase](http://search.cpan.org/perldoc?Authen::Passphrase) encoded string, based on the provided \\%args
+and $string to encode.  See ["SYNOPSIS"](#SYNOPSIS) and ["DESCRIPTION"](#DESCRIPTION) for more.
 
 # SEE ALSO
 
-[DBIx::Class::Migration](http://search.cpan.org/perldoc?DBIx::Class::Migration), [DBIx::Class::Migration::RunScript](http://search.cpan.org/perldoc?DBIx::Class::Migration::RunScript)
+[DBIx::Class::Migration](http://search.cpan.org/perldoc?DBIx::Class::Migration), [DBIx::Class::Migration::RunScript](http://search.cpan.org/perldoc?DBIx::Class::Migration::RunScript),
+[Authen::Passphrase](http://search.cpan.org/perldoc?Authen::Passphrase).
 
 # AUTHOR
 
-See [DBIx::Class::Migration](http://search.cpan.org/perldoc?DBIx::Class::Migration) for author information
+John Napiorkowski [email:jjnapiork@cpan.org](email:jjnapiork@cpan.org)
 
 # COPYRIGHT & LICENSE
 
-See [DBIx::Class::Migration](http://search.cpan.org/perldoc?DBIx::Class::Migration) for copyright and license information
+Copyright 2012, John Napiorkowski [email:jjnapiork@cpan.org](email:jjnapiork@cpan.org)
+
+This library is free software; you can redistribute it and/or modify it under
+the same terms as Perl itself.
