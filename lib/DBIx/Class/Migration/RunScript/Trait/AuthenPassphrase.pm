@@ -1,5 +1,7 @@
 package DBIx::Class::Migration::RunScript::Trait::AuthenPassphrase;
 
+our $VERSION = "0.002";
+
 use Moose::Role;
 use Authen::Passphrase;
 use Class::Load 'load_class';
@@ -36,7 +38,7 @@ DBIx::Class::Migration::RunScript::Trait::AuthenPassphrase - encode values
         my $self = shift;
         my $password = 'plaintext';
         my $encoded = $self->authen_passphrase(\%args, $password)
-        $self->resultset('User')->create({name=>"Mr Echo",password=>$encoded});
+        $self->schema->resultset('User')->create({name=>"Mr Echo",password=>$encoded});
       };
     };
 
@@ -103,7 +105,7 @@ You can supply correctly hashed passwords using the following:
       sub {
         my $self = shift;
         my $password = 'plaintext';
-        my $args => {
+        my $args = {
            passphrase       => 'rfc2307',
             passphrase_class => 'SaltedDigest',
             passphrase_args  => {
@@ -114,7 +116,7 @@ You can supply correctly hashed passwords using the following:
         };
 
         my $encoded = $self->authen_passphrase($args, $password);
-        $self->resultset('User')->create({passphrase=>$encoded});
+        $self->schema->resultset('User')->create({passphrase=>$encoded});
       };
     };
 
@@ -159,7 +161,7 @@ John Napiorkowski L<email:jjnapiork@cpan.org>
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2012, John Napiorkowski L<email:jjnapiork@cpan.org>
+Copyright 2013, John Napiorkowski L<email:jjnapiork@cpan.org>
 
 This library is free software; you can redistribute it and/or modify it under
 the same terms as Perl itself.
